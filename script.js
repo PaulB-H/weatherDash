@@ -41,6 +41,7 @@ function forecastWeather() {
             var obj = response.list[i];
              if (response.list[i].dt_txt.includes("12:00:00")) {
                  console.log("One 12:00:00 Forecast");
+                 console.log(response.list[i].weather[0].icon);
              }
         }
     })
