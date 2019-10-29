@@ -9,13 +9,13 @@ function currentWeather() {
         var d = new Date(response.dt * 1000);
         console.log(`D-${d.getDay()}/M-${d.getMonth() + 1}/Y-${d.getFullYear()}`);
         console.log(response.name);
-        console.log(response.main.humidity);
+        console.log(response.weather[0].icon);
         console.log(response.main.temp);
+        console.log(response.main.humidity);
         // console.log(response.wind.deg); // Could calculate to N,S,E,W
         console.log(response.wind.speed); // meters per second
         var lat = response.coord.lat;
         var lon = response.coord.lon;
-
         var uvIndexUrl = `http://api.openweathermap.org/data/2.5/uvi?appid=${apiKey}&lat=${lat}&lon=${lon} `;
         $.get(`${uvIndexUrl}`, function (response) {
             console.log(response.value);
