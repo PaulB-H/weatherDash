@@ -17,7 +17,6 @@ function currentWeather() {
             <p>Temp: ${response.main.temp}&deg;c</p>
             <p>Humidex: ${response.main.humidity}%</p>
             <p>Wind: ${response.wind.speed} m/s</p>
-
         `);
         console.log(response.weather[0].icon);
         console.log(response.main.temp);
@@ -45,7 +44,7 @@ function forecastWeather() {
         // GOAL for each list.dt_txt contains 12:00:00 print data
         // SUCCESS IT WORKS!!
 
-        console.log(response.list.length); // List length returns 40
+        console.log(response.list.length);
 
         for (var i = 0, l = `${response.list.length}`; i < l; i++) {
             var obj = response.list[i];
@@ -53,12 +52,17 @@ function forecastWeather() {
                 console.log("One 12:00:00 Forecast");
                 console.log(response.list[i].weather[0].icon);
                 var d = new Date(response.list[i].dt * 1000);
-                $(".card-group").append(` 
+                var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+                var dayNum = d.getDay();
+                var dayName = days[dayNum];
+                console.log(` Day Got: ${d.toUTCString()}` );
+                $("#forecastDeck").append(` 
                     <div class="card">
-                        <img src="..." class="card-img-top" alt="...">
+                        <img src="..." class="  card-img-top" alt="...">
                         <div class="card-body">
-                            <h5 id="forecastTitle" class="card-title">${response.list[i].dt}</h5>
-                            <p id="forecastDetails" class="card-text">
+                            <h5 class="card-title">${dayName}</h5>
+                            <p class="card-text">
+                            
 
                             </p>
                         </div>
