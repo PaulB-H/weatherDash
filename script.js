@@ -4,20 +4,20 @@ let cityName = "Toronto";
 function currentWeather() {
     let queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&APPID=${apiKey}`;
 
-    $.get(`${queryURL}`, function(response) {
+    $.get(`${queryURL}`, function (response) {
         console.log(response);
-        var d = new Date(response.dt*1000);
-        console.log(`D-${d.getDay()}/M-${d.getMonth()+1}/Y-${d.getFullYear()}`);
+        var d = new Date(response.dt * 1000);
+        console.log(`D-${d.getDay()}/M-${d.getMonth() + 1}/Y-${d.getFullYear()}`);
         console.log(response.name);
         console.log(response.main.humidity);
         console.log(response.main.temp);
         // console.log(response.wind.deg); // Could calculate to N,S,E,W
-        console.log(response.wind.speed); // meters/second
+        console.log(response.wind.speed); // meters per second
         var lat = response.coord.lat;
         var lon = response.coord.lon;
 
         var uvIndexUrl = `http://api.openweathermap.org/data/2.5/uvi?appid=${apiKey}&lat=${lat}&lon=${lon} `;
-        $.get(`${uvIndexUrl}`, function(response) {
+        $.get(`${uvIndexUrl}`, function (response) {
             console.log(response.value);
         });
 
@@ -26,3 +26,24 @@ function currentWeather() {
 
 currentWeather();
 
+function forecastWeather() {
+    let queryURL = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&units=metric&APPID=${apiKey}`;
+
+    $.get(`${queryURL}`, function (response) {
+        console.log(response);
+
+        // GOAL for each list.dt_txt contains 12:00:00 print data
+        // SUCCESS IT WORKS!!
+
+        console.log(response.list.length); // List length returns 40
+
+        for (var i = 0, l = `${response.list.length}`; i < l; i++) {
+            var obj = response.list[i];
+             if (response.list[i].dt_txt.includes("12:00:00")) {
+                 console.log("One 12:00:00 Forecast");
+             }
+        }
+    })
+};
+
+forecastWeather();
