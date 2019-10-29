@@ -22,18 +22,26 @@ $(document).ready(function () {
                 windString =  arr[(val % 16)] ;
             }
             degToCompass(windDeg);
-            $("#currentCard").append(`
-            <div class="card-body">
-            <img src=${iconUrl} class="card-img-top" alt="...">
-            <h1 class="card-title">${response.name}</h1>
-            <div id="currentDetails" class="card-text">
+            $("#currentContainer").append(`
+            <div class="card mb-3" style="max-width: 540px;">
+            <div class="row no-gutters">
+              <div class="col-md-4">
+                <img src=${iconUrl} class="card-img" alt="...">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                <h1 class="card-title">${response.name}</h1>
                 <h4>${d.getDay()}/${d.getMonth() + 1}/${d.getFullYear()}</h4>
                 <p style="margin-top: -10px;">DD/MM/YY</p>
                 <h4>Current Weather:</h4>
                 <p>Temp: ${response.main.temp}&deg;c</p>
                 <p>Humidex: ${response.main.humidity}%</p>
                 <p>Wind: ${response.wind.speed} m/s ${windString}</p>
+                <p id="uvIndex"></p>
+                </div>
+              </div>
             </div>
+          </div>
         `);
             var lat = response.coord.lat;
             var lon = response.coord.lon;
@@ -86,6 +94,7 @@ $(document).ready(function () {
     forecastWeather();
 
     $(searchButton).click(function () {
+        event.preventDefault();
         console.log("Search Button Clicked");
         cityName = searchBox.value;
         console.log(cityName);
