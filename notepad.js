@@ -37,3 +37,17 @@ $.get( "queryURL", function() {
   console.log();
 });
 
+
+
+
+
+// looping through response.list and returning only data if dt_txt includes 12:00:00
+
+for (var i = 0, l = `${response.list.length}`; i < l; i++) {
+  var obj = response.list[i];
+   if (response.list[i].dt_txt.includes("12:00:00")) {
+       console.log("One 12:00:00 Forecast");
+   }
+}
+
+// need to figure out how to gitignore this file
