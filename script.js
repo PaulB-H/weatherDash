@@ -74,6 +74,8 @@ forecastWeather();
 
 $(searchButton).click(function(){
     console.log("Search Button Clicked");
+    cityName = searchBox.value;
+    console.log(cityName)
 });
 
 })
