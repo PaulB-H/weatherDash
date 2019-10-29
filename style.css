@@ -3,3 +3,6 @@
     padding: 0;
 }
 
+.card-img-top {
+    max-width: 75%;
+}
