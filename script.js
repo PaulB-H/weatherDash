@@ -6,7 +6,8 @@ function currentWeather() {
 
     $.get(`${queryURL}`, function(response) {
         console.log(response);
-        console.log(response.dt*1000); // *1000 because its UNIX Time
+        var d = new Date(response.dt*1000);
+        console.log(`D-${d.getDay()}/M-${d.getMonth()+1}/Y-${d.getFullYear()}`);
         console.log(response.name);
         console.log(response.main.humidity);
         console.log(response.main.temp);
@@ -15,11 +16,11 @@ function currentWeather() {
         var lat = response.coord.lat;
         var lon = response.coord.lon;
 
-        var uvIndexUrl =` http://api.openweathermap.org/data/2.5/uvi?appid=${apiKey}&lat=${lat}&lon=${lon} `;
+        var uvIndexUrl = `http://api.openweathermap.org/data/2.5/uvi?appid=${apiKey}&lat=${lat}&lon=${lon} `;
         $.get(`${uvIndexUrl}`, function(response) {
             console.log(response.value);
         });
-        
+
     });
 }
 
