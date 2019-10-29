@@ -28,6 +28,9 @@ function currentWeather() {
         var uvIndexUrl = `http://api.openweathermap.org/data/2.5/uvi?appid=${apiKey}&lat=${lat}&lon=${lon} `;
         $.get(`${uvIndexUrl}`, function (response) {
             console.log(response.value);
+            $("#currentDetails").append(`
+            <p id="uvIndex">UV: ${response.value}</p>
+        `);
         });
 
     });
