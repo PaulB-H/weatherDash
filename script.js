@@ -9,7 +9,12 @@ function currentWeather() {
         var d = new Date(response.dt * 1000);
         console.log(`D-${d.getDay()}/M-${d.getMonth() + 1}/Y-${d.getFullYear()}`);
         console.log(response.name);
-        $("#currentName").html(`${response.name}`); // Got this working this commit
+        $("#currentName").html(`<h1>${response.name}</h1>`);
+        $("#currentDetails").html(`
+            <p>${d.getDay()}/${d.getMonth() + 1}/${d.getFullYear()}</p>
+            <p>Current Temperature: ${response.main.temp}&deg;c</p>
+
+        `);
         console.log(response.weather[0].icon);
         console.log(response.main.temp);
         console.log(response.main.humidity);
