@@ -9,10 +9,14 @@ function currentWeather() {
         var d = new Date(response.dt * 1000);
         console.log(`D-${d.getDay()}/M-${d.getMonth() + 1}/Y-${d.getFullYear()}`);
         console.log(response.name);
-        $("#currentName").html(`<h1>${response.name}</h1>`);
+        $("#currentName").html(`${response.name}`);
         $("#currentDetails").html(`
-            <p>${d.getDay()}/${d.getMonth() + 1}/${d.getFullYear()}</p>
-            <p>Current Temperature: ${response.main.temp}&deg;c</p>
+            <h3>${d.getDay()}/${d.getMonth() + 1}/${d.getFullYear()}</h3>
+            <p style="margin-top: -10px;">DD/MM/YY</p>
+            <p>Current Weather:</p>
+            <p>Temp: ${response.main.temp}&deg;c</p>
+            <p>Humidex: ${response.main.humidity}%</p>
+            <p>Wind: ${response.wind.speed} m/s</p>
 
         `);
         console.log(response.weather[0].icon);
@@ -46,8 +50,20 @@ function forecastWeather() {
         for (var i = 0, l = `${response.list.length}`; i < l; i++) {
             var obj = response.list[i];
              if (response.list[i].dt_txt.includes("12:00:00")) {
-                 console.log("One 12:00:00 Forecast");
-                 console.log(response.list[i].weather[0].icon);
+                console.log("One 12:00:00 Forecast");
+                console.log(response.list[i].weather[0].icon);
+                var d = new Date(response.list[i].dt * 1000);
+                $(".card-group").append(` 
+                    <div class="card">
+                        <img src="..." class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 id="forecastTitle" class="card-title">${response.list[i].dt}</h5>
+                            <p id="forecastDetails" class="card-text">
+
+                            </p>
+                        </div>
+                    </div>
+                 `);
              }
         }
     })
