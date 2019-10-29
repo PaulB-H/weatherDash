@@ -12,22 +12,29 @@ $(document).ready(function () {
             var d = new Date(response.dt * 1000);
             var iconCode = (response.weather[0].icon);
             var iconUrl = `"http://openweathermap.org/img/wn/${iconCode}@2x.png"`
+            var windDeg = response.wind.deg;
+            var windString;
+            console.log(response.wind.deg);
+            function degToCompass(num) {
+                var val = Math.floor((num / 22.5) + 0.5);
+                var arr = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];
+                console.log( arr[(val % 16)] );
+                windString =  arr[(val % 16)] ;
+            }
+            degToCompass(windDeg);
             $("#currentCard").append(`
             <div class="card-body">
             <img src=${iconUrl} class="card-img-top" alt="...">
             <h1 class="card-title">${response.name}</h1>
             <div id="currentDetails" class="card-text">
-                <h3>${d.getDay()}/${d.getMonth() + 1}/${d.getFullYear()}</h3>
+                <h4>${d.getDay()}/${d.getMonth() + 1}/${d.getFullYear()}</h4>
                 <p style="margin-top: -10px;">DD/MM/YY</p>
-                <p>Current Weather:</p>
+                <h4>Current Weather:</h4>
                 <p>Temp: ${response.main.temp}&deg;c</p>
                 <p>Humidex: ${response.main.humidity}%</p>
-                <p>Wind: ${response.wind.speed} m/s</p>
+                <p>Wind: ${response.wind.speed} m/s ${windString}</p>
             </div>
         `);
-
-            // console.log(response.wind.deg); // Could calculate to N,S,E,W
-
             var lat = response.coord.lat;
             var lon = response.coord.lon;
             var uvIndexUrl = `http://api.openweathermap.org/data/2.5/uvi?appid=${apiKey}&lat=${lat}&lon=${lon} `;
@@ -84,7 +91,7 @@ $(document).ready(function () {
         console.log(cityName);
         $("#currentCard").empty();
         currentWeather(cityName);
-        $("#forecastDeck").empty();
+        $("#forecastDeck").empty();// added this
         forecastWeather(cityName);
         
     });
