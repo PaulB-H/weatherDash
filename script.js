@@ -54,6 +54,8 @@ function forecastWeather() {
              if (response.list[i].dt_txt.includes("12:00:00")) {
                 console.log("One 12:00:00 Forecast");
                 console.log(response.list[i].weather[0].icon);
+                var iconCode = (response.list[i].weather[0].icon);
+                
                 var d = new Date(response.list[i].dt * 1000);
                 var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
                 var dayNum = d.getDay();
@@ -63,11 +65,12 @@ function forecastWeather() {
                     <div class="card">
                         <img src="..." class="  card-img-top" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title">${dayName}</h5>
+                            <h3 class="card-title">${dayName}</h3>
                             <p class="card-text">
-                            
+                            <p>${d.getDay()}/${d.getMonth() + 1}/${d.getFullYear()}<p>
+                            <p>Temp: ${response.list[i].main.temp}&deg;c</p>
+                            <p>Humidex: ${response.list[i].main.humidity}%</p>
 
-                            </p>
                         </div>
                     </div>
                  `);
