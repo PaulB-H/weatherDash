@@ -26,7 +26,7 @@ $(document).ready(function () {
             <div class="card mb-3" style="max-width: 540px;">
             <div class="row no-gutters">
               <div class="col-md-4">
-                <img src=${iconUrl} class="card-img" alt="...">
+                <img id="currentIcon" src=${iconUrl} class="card-img" alt="...">
               </div>
               <div class="col-md-8">
                 <div class="card-body">
@@ -74,7 +74,7 @@ $(document).ready(function () {
                     var dayNum = d.getDay();
                     var dayName = days[dayNum];
                     $("#forecastDeck").append(` 
-                    <div class="card">
+                    <div class="card    ">
                         <img src=${iconUrl} class="card-img-top" alt="...">
                         <div class="card-body">
                             <h3 class="card-title">${dayName}</h3>
@@ -82,7 +82,6 @@ $(document).ready(function () {
                             <p>${d.getDay()}/${d.getMonth() + 1}/${d.getFullYear()}<p>
                             <p>Temp: ${response.list[i].main.temp}&deg;c</p>
                             <p>Humidex: ${response.list[i].main.humidity}%</p>
-
                         </div>
                     </div>
                  `);
@@ -100,7 +99,7 @@ $(document).ready(function () {
         console.log(cityName);
         $("#currentCard").empty();
         currentWeather(cityName);
-        $("#forecastDeck").empty();// added this
+        $("#forecastDeck").empty();
         forecastWeather(cityName);
         
     });

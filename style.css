@@ -4,5 +4,19 @@
 }
 
 .card-img-top {
-    max-width: 75%;
+    max-width: 112px;
+}
+
+#currentIcon {
+    max-width: 200px;
+}
+
+.testContain {
+    display: flex;
+}
+
+.forecastBlock {
+    border: 2px solid black;
+    margin: 2px;
+    background-color: lightblue;
 }
