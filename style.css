@@ -13,10 +13,17 @@
 
 .testContain {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .forecastBlock {
-    border: 2px solid black;
-    margin: 2px;
+    border: 1px solid black;
+    margin: 1px;
     background-color: lightblue;
+    font-family: 'Montserrat', sans-serif;
+    border-radius: 2px;
+    display: flex;
+    max-height: 135px;
+    max-width: 183px;
 }
