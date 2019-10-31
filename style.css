@@ -3,18 +3,27 @@
     padding: 0;
 }
 
-.card-img-top {
-    max-width: 112px;
-}
 
-#currentIcon {
-    max-width: 200px;
+.header {
+    display: block;
+    text-align: center;
 }
 
 .testContain {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+}
+
+.currentBlock {
+    border: 1px solid black;
+    margin: 1px;
+    background-color: rgb(207, 235, 245);
+    font-family: 'Montserrat', sans-serif;
+    border-radius: 2px;
+    display: flex;
+    max-width: 183px;
+    min-width: 132px;
 }
 
 .forecastBlock {
