@@ -9,6 +9,11 @@ $(document).ready(function () {
 
         $.get(`${queryURL}`, function (response) {
             console.log(response);
+            var options = { 
+                weekday: 'long',
+                month: 'short',
+            };
+            console.log(new Intl.DateTimeFormat('en-US', options).format());
             var d = new Date(response.dt * 1000);
             console.log(d.getDay());
             var iconCode = (response.weather[0].icon);
@@ -25,7 +30,7 @@ $(document).ready(function () {
             // degToCompass(windDeg);
             // <h4>${d.getDay()}/${d.getMonth() + 1}/${d.getFullYear()}</h4>
             // <h1 class="card-title">${response.name}</h1>
-            $(".currentName").html(`${response.name}: ${d.getDay()}/${d.getMonth() + 1}`);
+            $(".currentName").html(`${response.name}: ${(new Intl.DateTimeFormat('en-GB', options).format())}`);
             $(".weatherContainer").prepend(`
             <div class="currentBlock flex-item">
             <table class="table table-sm">
@@ -109,6 +114,10 @@ $(document).ready(function () {
 
     $(".searchButton").click(function () {
         event.preventDefault();
+        if ($(".searchTxt").val() == false){
+            console.log("Nothing entered!")
+            return;
+        };
         console.log("Search Button Clicked");
         cityName = $(".searchTxt").val();
         console.log(cityName);
