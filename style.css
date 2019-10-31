@@ -31,18 +31,19 @@ img {
 
 .currentBlock {
     border: 1px solid black;
-    margin: 1px;
+    margin: 5px;
     background-color: rgb(207, 235, 245);
     font-family: 'Montserrat', sans-serif;
     border-radius: 2px;
     display: flex;
     max-width: 183px;
     min-width: 132px;
+    max-height: 200px;
 }
 
 .forecastBlock {
     border: 1px solid black;
-    margin: 1px;
+    margin: 5px;
     background-color: #add8e6;
     font-family: 'Montserrat', sans-serif;
     border-radius: 2px;

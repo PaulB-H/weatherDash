@@ -10,6 +10,7 @@ $(document).ready(function () {
         $.get(`${queryURL}`, function (response) {
             console.log(response);
             var d = new Date(response.dt * 1000);
+            console.log(d.getDay());
             var iconCode = (response.weather[0].icon);
             var iconUrl = `"http://openweathermap.org/img/wn/${iconCode}@2x.png"`
             // var windDeg = response.wind.deg;
@@ -24,13 +25,13 @@ $(document).ready(function () {
             // degToCompass(windDeg);
             // <h4>${d.getDay()}/${d.getMonth() + 1}/${d.getFullYear()}</h4>
             // <h1 class="card-title">${response.name}</h1>
-            $(".currentName").html(response.name);
+            $(".currentName").html(`${response.name}: ${d.getDay()}/${d.getMonth() + 1}`);
             $(".weatherContainer").prepend(`
             <div class="currentBlock flex-item">
             <table class="table table-sm">
                 <thead>
                     <tr>
-                    <td>Currently: <img src=${iconUrl} class="" alt="..."style=""><td>
+                    <td><strong>Current:</strong> <img src=${iconUrl} class="" alt="..."style=""></td>
                     </tr>
                 </thead>
                 <tbody>
@@ -38,7 +39,7 @@ $(document).ready(function () {
                         <td>Temp: ${response.main.temp}&deg;c</td>
                     </tr>
                     <tr>
-                        <td>Humidity: ${response.main.humidity}%</td>
+                        <td>Humid: ${response.main.humidity}%</td>
                     </tr>
                     <tr>
                         <td>Wind: ${response.wind.speed} m/s</td>
@@ -80,18 +81,25 @@ $(document).ready(function () {
                     var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
                     var dayNum = d.getDay();
                     var dayName = days[dayNum];
-                    $("#forecastDeck").append(` 
-                    <div class="card    ">
-                        <img src=${iconUrl} class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h3 class="card-title">${dayName}</h3>
-                            <p class="card-text">
-                            <p>${d.getDay()}/${d.getMonth() + 1}/${d.getFullYear()}<p>
-                            <p>Temp: ${response.list[i].main.temp}&deg;c</p>
-                            <p>Humidex: ${response.list[i].main.humidity}%</p>
-                        </div>
+                    $(".weatherContainer").append(`
+                    <div class="forecastBlock flex-item">
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th scope="col">${dayName} <img src=${iconUrl} class="card-img-top" alt="..."></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Temp: ${response.list[i].main.temp}&deg;c</td>
+                            </tr>
+                            <tr>
+                                <td>Humid: ${response.list[i].main.humidity}%</td>
+                            </tr>
+                        </tbody>
+                    </table>
                     </div>
-                 `);
+                    `);
                 }
             }
         })
