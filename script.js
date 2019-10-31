@@ -12,45 +12,52 @@ $(document).ready(function () {
             var d = new Date(response.dt * 1000);
             var iconCode = (response.weather[0].icon);
             var iconUrl = `"http://openweathermap.org/img/wn/${iconCode}@2x.png"`
-            var windDeg = response.wind.deg;
-            var windString;
-            console.log(response.wind.deg);
-            function degToCompass(num) {
-                var val = Math.floor((num / 22.5) + 0.5);
-                var arr = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];
-                console.log( arr[(val % 16)] );
-                windString =  arr[(val % 16)] ;
-            }
-            degToCompass(windDeg);
-            $("#currentContainer").append(`
-            <div class="card mb-3" style="max-width: 540px;">
-            <div class="row no-gutters">
-              <div class="col-md-4">
-                <img id="currentIcon" src=${iconUrl} class="card-img" alt="...">
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                <h1 class="card-title">${response.name}</h1>
-                <h4>${d.getDay()}/${d.getMonth() + 1}/${d.getFullYear()}</h4>
-                <p style="margin-top: -10px;">DD/MM/YY</p>
-                <h4>Current Weather:</h4>
-                <p>Temp: ${response.main.temp}&deg;c</p>
-                <p>Humidex: ${response.main.humidity}%</p>
-                <p>Wind: ${response.wind.speed} m/s ${windString}</p>
-                <p id="uvIndex"></p>
-                </div>
-              </div>
+            // var windDeg = response.wind.deg;
+            // var windString;
+            // console.log(response.wind.deg);
+            // function degToCompass(num) {
+            //     var val = Math.floor((num / 22.5) + 0.5);
+            //     var arr = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];
+            //     console.log( arr[(val % 16)] );
+            //     windString =  arr[(val % 16)] ;
+            // }
+            // degToCompass(windDeg);
+            // <h4>${d.getDay()}/${d.getMonth() + 1}/${d.getFullYear()}</h4>
+            // <h1 class="card-title">${response.name}</h1>
+            $(".currentName").html(response.name);
+            $(".weatherContainer").prepend(`
+            <div class="currentBlock flex-item">
+            <table class="table table-sm">
+                <thead>
+                    <tr>
+                    <td>Currently: <img src=${iconUrl} class="" alt="..."style=""><td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Temp: ${response.main.temp}&deg;c</td>
+                    </tr>
+                    <tr>
+                        <td>Humidity: ${response.main.humidity}%</td>
+                    </tr>
+                    <tr>
+                        <td>Wind: ${response.wind.speed} m/s</td>
+                    </tr>
+                    <tr>
+                        <td id="uvIndex">UV: </td>
+                    </tr>
+                </tbody>
+            </table>
             </div>
-          </div>
-        `);
+            `);
             var lat = response.coord.lat;
             var lon = response.coord.lon;
             var uvIndexUrl = `http://api.openweathermap.org/data/2.5/uvi?appid=${apiKey}&lat=${lat}&lon=${lon} `;
             $.get(`${uvIndexUrl}`, function (response) {
                 console.log(`UV Value was: ${response.value}`);
-                $("#currentDetails").append(`
-            <p id="uvIndex">UV: ${response.value}</p>
-        `);
+                $("#uvIndex").html(`
+                    UV: ${response.value}
+                `);
             });
 
         });
@@ -92,16 +99,16 @@ $(document).ready(function () {
 
     forecastWeather();
 
-    $(searchButton).click(function () {
+    $(".searchButton").click(function () {
         event.preventDefault();
         console.log("Search Button Clicked");
-        cityName = searchBox.value;
+        cityName = $(".searchTxt").val();
         console.log(cityName);
-        $("#currentCard").empty();
+        $(".weatherContainer").empty();
         currentWeather(cityName);
         $("#forecastDeck").empty();
         forecastWeather(cityName);
-        
+        $(".searchTxt").val("");
     });
 
 })

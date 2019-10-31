@@ -6,12 +6,24 @@ p {
     margin: 0%;
 }
 
+img {
+    max-width: 50px;
+    max-height: 50px;
+}
+
 .header {
     display: block;
     text-align: center;
+    margin-bottom: 5px; 
+    border-bottom: 2px solid black;
 }
 
-.testContain {
+.searchContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.weatherContainer {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -37,4 +49,14 @@ p {
     display: flex;
     max-height: 135px;
     max-width: 183px;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: rgb(236, 236, 236);
+    color: darkgray;
+    text-align: center;
 }

@@ -16,42 +16,32 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- Google font for Montserrat font-family: 'Montserrat', sans-serif;-->
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" rel="stylesheet">
     <script src="script.js"></script>
     <link rel="stylesheet" href="style.css">
-    <title>Weather Dash</title>
+    <title>weatherDash</title>
 </head>
 
 <body>
-    <div class="header" style="margin-bottom: 5px; border-bottom: 2px solid black;">
+    <div class="header">
         <h2>Weather Dash</h2>
-        <form class="example" action="/action_page.php" style="margin:auto;max-width:300px">
-            <input type="text" placeholder="Enter city here.." name="search2">
-            <button type="submit">Search<i class="fa fa-search"></i></button>
-          </form>
-        <h3>Toronto</h3>
-    </div>
-    <div class="testContain">
-            <div class="currentBlock flex-item">
-                    <table class="table table-sm">
-                        <thead>
-                            <tr>
-                                <th scope="col">Current<img src=http://openweathermap.org/img/wn/09n.png class="" alt="..."
-                                        style=""></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Temp: 11.28°c</td>
-                            </tr>
-                            <tr>
-                                <td>Humidex: 93%</td>
-                            </tr>
-                            <tr>
-                                    <td>Humidex: 93%</td>
-                                </tr>
-                        </tbody>
-                    </table>
+        <div class="searchContainer">
+            <form class="searchBar" action="">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <button id="button-addon5" type="submit" class="searchButton btn btn-primary"><i
+                                class="fa fa-search"></i></button>
+                    </div>
+                    <input type="text" placeholder="Enter a city here..." class="form-control searchTxt">
+                    <!-- <input type="search" placeholder="Enter city here" aria-describedby="button-addon8"
+                    class="form-control searchTxt"> -->
                 </div>
+            </form>
+        </div>
+        <h3 class="currentName">Toronto</h3>
+    </div>
+    <div class="weatherContainer">
+        
         <div class="forecastBlock flex-item">
             <table class="table table-sm">
                 <thead>
@@ -145,7 +135,9 @@
 
     </div>
     </div>
-
+    <div class="footer">
+        <p>Paul Bernard-Hall</p>
+    </div>
 </body>
 
 </html>
