@@ -2,7 +2,9 @@
     margin: 0;
     padding: 0;
 }
-
+p {
+    margin: 0%;
+}
 
 .header {
     display: block;
@@ -29,7 +31,7 @@
 .forecastBlock {
     border: 1px solid black;
     margin: 1px;
-    background-color: lightblue;
+    background-color: #add8e6;
     font-family: 'Montserrat', sans-serif;
     border-radius: 2px;
     display: flex;
