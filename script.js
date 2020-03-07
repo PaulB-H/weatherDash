@@ -8,29 +8,22 @@ $(document).ready(function () {
         let queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&APPID=${apiKey}`;
 
         $.get(`${queryURL}`, function (response) {
-            console.log(response);
-            var options = { 
+
+            const options = {
                 weekday: 'long',
-                month: 'short',
+                month: 'long',
+                day: 'numeric'
             };
-            console.log(new Intl.DateTimeFormat('en-US', options).format());
-            var d = new Date(response.dt * 1000);
-            console.log(d.getDay());
+
+            const dateTime = new Intl.DateTimeFormat('en-US', options);
+            var d = new Date();
+            console.log(dateTime.format(d));
+
             var iconCode = (response.weather[0].icon);
             var iconUrl = `"http://openweathermap.org/img/wn/${iconCode}@2x.png"`
-            // var windDeg = response.wind.deg;
-            // var windString;
-            // console.log(response.wind.deg);
-            // function degToCompass(num) {
-            //     var val = Math.floor((num / 22.5) + 0.5);
-            //     var arr = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];
-            //     console.log( arr[(val % 16)] );
-            //     windString =  arr[(val % 16)] ;
-            // }
-            // degToCompass(windDeg);
-            // <h4>${d.getDay()}/${d.getMonth() + 1}/${d.getFullYear()}</h4>
-            // <h1 class="card-title">${response.name}</h1>
-            $(".currentName").html(`${response.name}: ${(new Intl.DateTimeFormat('en-GB', options).format())}`);
+
+            $(".currentName").html(`${response.name}: ${dateTime.format(d)}`);
+
             $(".weatherContainer").prepend(`
             <div class="currentBlock flex-item">
             <table class="table table-sm">
@@ -65,7 +58,6 @@ $(document).ready(function () {
                     UV: ${response.value}
                 `);
             });
-
         });
     }
 
@@ -114,7 +106,7 @@ $(document).ready(function () {
 
     $(".searchButton").click(function () {
         event.preventDefault();
-        if ($(".searchTxt").val() == false){
+        if ($(".searchTxt").val() == false) {
             console.log("Nothing entered!")
             return;
         };
