@@ -9,6 +9,8 @@ $(document).ready(function () {
 
         $.get(`${queryURL}`, function (response) {
 
+            console.log(response);
+
             const options = {
                 weekday: 'long',
                 month: 'long',
@@ -22,28 +24,24 @@ $(document).ready(function () {
             var iconCode = (response.weather[0].icon);
             var iconUrl = `"http://openweathermap.org/img/wn/${iconCode}@2x.png"`
 
-            $(".currentName").html(`${response.name}: ${dateTime.format(d)}`);
+            $(".currentName").html(`Results For: ${response.name} <br /> <small>${dateTime.format(d)}</small>`);
 
-            $(".weatherContainer").prepend(`
+            $(".currentContainer").prepend(`
             <div class="currentBlock flex-item">
             <table class="table table-sm">
                 <thead>
                     <tr>
-                    <td><strong>Current:</strong> <img src=${iconUrl} class="" alt="..."style=""></td>
+                    <td><h5 style="float: left; margin-top: 15px;">Today</h5></td><td><img src=${iconUrl} class="card-img-top" alt="..." style="float: right;"></td>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>Temp: ${response.main.temp}&deg;c</td>
-                    </tr>
-                    <tr>
                         <td>Humid: ${response.main.humidity}%</td>
                     </tr>
                     <tr>
                         <td>Wind: ${response.wind.speed} m/s</td>
-                    </tr>
-                    <tr>
-                        <td id="uvIndex">UV: </td>
+                        <td id="uvIndex" style="text-align: right;">UV: </td>
                     </tr>
                 </tbody>
             </table>
@@ -78,12 +76,12 @@ $(document).ready(function () {
                     var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
                     var dayNum = d.getDay();
                     var dayName = days[dayNum];
-                    $(".weatherContainer").append(`
+                    $(".forecastContainer").append(`
                     <div class="forecastBlock flex-item">
                     <table class="table table-sm">
                         <thead>
                             <tr>
-                                <th scope="col">${dayName} <img src=${iconUrl} class="card-img-top" alt="..."></th>
+                                <th scope="col"><h5 style="float: left; margin-top: 15px;">${dayName}</h5><img src=${iconUrl} class="card-img-top" alt="..." style="float: right;"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -113,10 +111,13 @@ $(document).ready(function () {
         console.log("Search Button Clicked");
         cityName = $(".searchTxt").val();
         console.log(cityName);
-        $(".weatherContainer").empty();
+
+        $(".currentContainer, .forecastContainer").empty();
         currentWeather(cityName);
+
         $("#forecastDeck").empty();
         forecastWeather(cityName);
+
         $(".searchTxt").val("");
     });
 

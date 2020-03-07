@@ -2,19 +2,23 @@
     margin: 0;
     padding: 0;
 }
-p {
-    margin: 0%;
+
+.searchButton {
+    background: lightblue;
+    border: none;
 }
 
-img {
+.card-img-top {
     max-width: 50px;
     max-height: 50px;
+    background: radial-gradient(circle at center, lightblue 0, white 75%);
+    border-radius: 50%;
 }
 
 .header {
     display: block;
     text-align: center;
-    margin-bottom: 5px; 
+    margin-bottom: 5px;
     border-bottom: 2px solid black;
 }
 
@@ -23,33 +27,43 @@ img {
     justify-content: center;
 }
 
-.weatherContainer {
+.currentContainer, .forecastContainer {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
 
 .currentBlock {
-    border: 1px solid black;
     margin: 5px;
-    background-color: rgb(207, 235, 245);
+    /* background-color: rgb(207, 235, 245); */
     font-family: 'Montserrat', sans-serif;
-    border-radius: 2px;
+    border-radius: 10px;
     display: flex;
-    max-width: 183px;
+    /* max-width: 183px; */
     min-width: 132px;
     max-height: 200px;
 }
 
+.currentBlock table thead {
+    text-align: center;
+}
+
+.currentBlock table thead tr td {
+    border-top: none;
+}
+
 .forecastBlock {
-    border: 1px solid black;
     margin: 5px;
-    background-color: #add8e6;
+    /* background-color: #add8e6; */
     font-family: 'Montserrat', sans-serif;
-    border-radius: 2px;
+    border-radius: 10px;
     display: flex;
     max-height: 135px;
     max-width: 183px;
+}
+
+.forecastBlock table thead tr th {
+    border-top: none;
 }
 
 .footer {
@@ -60,4 +74,10 @@ img {
     background-color: rgb(236, 236, 236);
     color: darkgray;
     text-align: center;
+}
+
+.card-columns {
+    @media only screen and (max-width: 600px) {
+        column-count: 5;
+    }
 }
